@@ -4,85 +4,93 @@ import { FontAwesome } from '@expo/vector-icons'
 
 const Home = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.greeting}>Hi, Akhdan 👋</Text>
-        <Image
-          source={{ uri: 'https://via.placeholder.com/50' }}
-          style={styles.profileImage}
-        />
-      </View>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.greeting}>Hi, Akhdan 👋</Text>
+          <Image
+            source={{ uri: 'https://via.placeholder.com/50' }}
+            style={styles.profileImage}
+          />
+        </View>
 
-      <View style={[styles.searchContainer, styles.shadowSearch]}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Cari artikel, video, atau berita"
-          placeholderTextColor="#49454F"
-        />
-        <FontAwesome name="search" size={18} color="#888888" style={styles.searchIcon} />
-      </View>
+        <View style={[styles.searchContainer, styles.shadowSearch]}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Cari artikel, video, atau berita"
+            placeholderTextColor="#49454F"
+          />
+          <FontAwesome name="search" size={18} color="#888888" style={styles.searchIcon} />
+        </View>
 
-      <View style={styles.categoryContainer}>
-        <Text style={styles.sectionTitle}>Artikel populer</Text>
-        <TouchableOpacity>
-          <Text style={styles.viewAll}>Lihat semua</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipContainer}>
-        <TouchableOpacity style={styles.chip}>
-          <Text style={styles.chipText}>Paling Populer</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.chip}>
-          <Text style={styles.chipText}>Artikel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.chip}>
-          <Text style={styles.chipText}>Video</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.chip}>
-          <Text style={styles.chipText}>Berita</Text>
-        </TouchableOpacity>
-      </ScrollView>
+        <View style={styles.categoryContainer}>
+          <Text style={styles.sectionTitle}>Artikel populer</Text>
+          <TouchableOpacity>
+            <Text style={styles.viewAll}>Lihat semua</Text>
+          </TouchableOpacity>
+        </View>
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipContainer}>
+          <TouchableOpacity style={styles.chip}>
+            <Text style={styles.chipText}>Paling Populer</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.chip}>
+            <Text style={styles.chipText}>Artikel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.chip}>
+            <Text style={styles.chipText}>Video</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.chip}>
+            <Text style={styles.chipText}>Berita</Text>
+          </TouchableOpacity>
+        </ScrollView>
 
         <View style={styles.postContainer}>
-            <TouchableOpacity>
-                <Text style={styles.berikut}>Berikut</Text>
-            </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.berikut}>Berikut</Text>
+          </TouchableOpacity>
         </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.articleContainer}>
-        <View style={[styles.articleCard, styles.articleCardShadow]}>
-          <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
-          <View style={styles.articleContent}>
-            <Text style={styles.articleTitle}>Berita, Lokasi</Text>
-            <Text style={styles.articleLocation}>Kab, Lokasi</Text>
-            <Text style={styles.articleStats}>4.8K</Text>
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.articleContainer}>
+          <View style={[styles.articleCard, styles.articleCardShadow]}>
+            <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
+            <View style={styles.articleContent}>
+              <Text style={styles.articleTitle}>Berita, Lokasi</Text>
+              <Text style={styles.articleLocation}>Kab, Lokasi</Text>
+              <Text style={styles.articleStats}>4.8K</Text>
+            </View>
           </View>
-        </View>
-        <View style={[styles.articleCard, styles.articleCardShadow]}>
-          <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
-          <View style={styles.articleContent}>
-            <Text style={styles.articleTitle}>Berita, Lokasi</Text>
-            <Text style={styles.articleLocation}>Kab, Lokasi</Text>
-            <Text style={styles.articleStats}>4.8K</Text>
+          <View style={[styles.articleCard, styles.articleCardShadow]}>
+            <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
+            <View style={styles.articleContent}>
+              <Text style={styles.articleTitle}>Berita, Lokasi</Text>
+              <Text style={styles.articleLocation}>Kab, Lokasi</Text>
+              <Text style={styles.articleStats}>4.8K</Text>
+            </View>
           </View>
-        </View>
-        <View style={[styles.articleCard, styles.articleCardShadow]}>
-          <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
-          <View style={styles.articleContent}>
-            <Text style={styles.articleTitle}>Berita, Lokasi</Text>
-            <Text style={styles.articleLocation}>Kab, Lokasi</Text>
-            <Text style={styles.articleStats}>4.8K</Text>
+          <View style={[styles.articleCard, styles.articleCardShadow]}>
+            <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
+            <View style={styles.articleContent}>
+              <Text style={styles.articleTitle}>Berita, Lokasi</Text>
+              <Text style={styles.articleLocation}>Kab, Lokasi</Text>
+              <Text style={styles.articleStats}>4.8K</Text>
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 80, // Adjust based on your bottom bar height
+  },
   container: {
-    flex: 1,
     backgroundColor: '#ffffff',
     paddingTop: 10,
+    paddingBottom: 80
   },
   header: {
     flexDirection: 'row',
@@ -109,14 +117,12 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingHorizontal: 20,
   },
-
-shadowSearch : {
-    shadowColor : "#000000",
-    shadowOpacity : 0.2,
-    shadowRadius : 4,
-    shadowOffset : {width: 0, height: 4}
-},
-
+  shadowSearch: {
+    shadowColor: '#000000',
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 4 },
+  },
   searchInput: {
     flex: 1,
     padding: 10,
@@ -131,12 +137,11 @@ shadowSearch : {
     paddingHorizontal: 20,
     marginTop: 10,
   },
-
   postContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingHorizontal: 20,
-    alignItems: "center"
+    alignItems: 'center',
   },
   sectionTitle: {
     fontSize: 20,
@@ -146,13 +151,11 @@ shadowSearch : {
     color: '#888888',
     fontSize: 16,
   },
-
   berikut: {
     color: '#1E1E1E',
     fontSize: 16,
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end',
   },
-
   chipContainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
@@ -164,7 +167,7 @@ shadowSearch : {
     paddingVertical: 8,
     paddingHorizontal: 15,
     marginRight: 10,
-    height: 35
+    height: 35,
   },
   chipText: {
     color: '#6c4bf4',
@@ -173,15 +176,14 @@ shadowSearch : {
     flexDirection: 'row',
     paddingHorizontal: 20,
     marginVertical: 25,
+    paddingVertical : 20
   },
-
   articleCardShadow: {
-    shadowColor: "#000000",
+    shadowColor: '#000000',
     shadowOpacity: 0.4,
-    shadowOffset: {height: 4, width: 0},
-    shadowRadius: 6
+    shadowOffset: { height: 4, width: 0 },
+    shadowRadius: 6,
   },
-
   articleCard: {
     width: 270,
     height: 400,
@@ -193,12 +195,12 @@ shadowSearch : {
   },
   heartIcon: {
     alignSelf: 'flex-end',
-    padding : 10,
-    color : "red",
+    padding: 10,
+    color: 'red',
   },
   articleContent: {
     marginTop: 20,
-    padding : 10
+    padding: 10,
   },
   articleTitle: {
     fontSize: 16,
@@ -211,12 +213,6 @@ shadowSearch : {
   articleStats: {
     fontSize: 14,
     color: '#333',
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: '#6c4bf4',
-    paddingVertical: 10,
   },
 })
 
