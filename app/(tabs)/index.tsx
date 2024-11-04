@@ -46,10 +46,12 @@ const Home = () => {
         </ScrollView>
 
         <View style={styles.postContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.berikutContainer}>
             <Text style={styles.berikut}>Berikut</Text>
+            <FontAwesome name="angle-right" size={16} color="#1E1E1E" style={styles.arrowIcon} />
           </TouchableOpacity>
         </View>
+
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.articleContainer}>
           <View style={[styles.articleCard, styles.articleCardShadow]}>
@@ -151,6 +153,14 @@ const styles = StyleSheet.create({
     color: '#888888',
     fontSize: 16,
   },
+  berikutContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  arrowIcon: {
+    marginLeft: 5,
+  },
+  
   berikut: {
     color: '#1E1E1E',
     fontSize: 16,
@@ -159,7 +169,7 @@ const styles = StyleSheet.create({
   chipContainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    marginVertical: 10,
+    paddingVertical: 20
   },
   chip: {
     backgroundColor: '#eae6fd',

@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#65558F',
     marginHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderRadius: 25,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 10 },
