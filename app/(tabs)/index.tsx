@@ -127,14 +127,14 @@ shadowSearch : {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: 10,
   },
 
   postContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingHorizontal: 20,
-    marginTop: 20,
+    alignItems: "center"
   },
   sectionTitle: {
     fontSize: 20,
@@ -170,11 +170,11 @@ shadowSearch : {
   articleContainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 25,
   },
   articleCard: {
-    width: 250,
-    height: 350,
+    width: 270,
+    height: 400,
     backgroundColor: '#D9D9D9',
     borderRadius: 30,
     marginRight: 15,
