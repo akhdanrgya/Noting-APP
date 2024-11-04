@@ -17,6 +17,7 @@ const Home = () => {
         <TextInput
           style={styles.searchInput}
           placeholder="Cari artikel, video, atau berita"
+          placeholderTextColor="#49454F"
         />
         <FontAwesome name="search" size={18} color="#888888" style={styles.searchIcon} />
       </View>
@@ -48,7 +49,7 @@ const Home = () => {
             </TouchableOpacity>
         </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.articleContainer}>
-        <View style={styles.articleCard}>
+        <View style={[styles.articleCard, styles.articleCardShadow]}>
           <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
           <View style={styles.articleContent}>
             <Text style={styles.articleTitle}>Berita, Lokasi</Text>
@@ -56,7 +57,7 @@ const Home = () => {
             <Text style={styles.articleStats}>4.8K</Text>
           </View>
         </View>
-        <View style={styles.articleCard}>
+        <View style={[styles.articleCard, styles.articleCardShadow]}>
           <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
           <View style={styles.articleContent}>
             <Text style={styles.articleTitle}>Berita, Lokasi</Text>
@@ -64,7 +65,7 @@ const Home = () => {
             <Text style={styles.articleStats}>4.8K</Text>
           </View>
         </View>
-        <View style={styles.articleCard}>
+        <View style={[styles.articleCard, styles.articleCardShadow]}>
           <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
           <View style={styles.articleContent}>
             <Text style={styles.articleTitle}>Berita, Lokasi</Text>
@@ -102,10 +103,11 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 20,
+    marginVertical: 30,
+    marginHorizontal: 20,
     backgroundColor: '#ECE6F0',
     borderRadius: 30,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
 
 shadowSearch : {
@@ -172,6 +174,14 @@ shadowSearch : {
     paddingHorizontal: 20,
     marginVertical: 25,
   },
+
+  articleCardShadow: {
+    shadowColor: "#000000",
+    shadowOpacity: 0.4,
+    shadowOffset: {height: 4, width: 0},
+    shadowRadius: 6
+  },
+
   articleCard: {
     width: 270,
     height: 400,
