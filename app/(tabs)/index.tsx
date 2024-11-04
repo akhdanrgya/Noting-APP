@@ -56,6 +56,22 @@ const Home = () => {
             <Text style={styles.articleStats}>4.8K</Text>
           </View>
         </View>
+        <View style={styles.articleCard}>
+          <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
+          <View style={styles.articleContent}>
+            <Text style={styles.articleTitle}>Berita, Lokasi</Text>
+            <Text style={styles.articleLocation}>Kab, Lokasi</Text>
+            <Text style={styles.articleStats}>4.8K</Text>
+          </View>
+        </View>
+        <View style={styles.articleCard}>
+          <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
+          <View style={styles.articleContent}>
+            <Text style={styles.articleTitle}>Berita, Lokasi</Text>
+            <Text style={styles.articleLocation}>Kab, Lokasi</Text>
+            <Text style={styles.articleStats}>4.8K</Text>
+          </View>
+        </View>
       </ScrollView>
     </View>
   )
