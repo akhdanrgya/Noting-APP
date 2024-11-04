@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
+import { dummyArticles } from '@/components/dummy/Card'
 
 const Home = () => {
   return (
@@ -54,31 +55,21 @@ const Home = () => {
 
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.articleContainer}>
-          <View style={[styles.articleCard, styles.articleCardShadow]}>
+        {dummyArticles.map((article) => (
+          <View key={article.id} style={[styles.articleCard, styles.articleCardShadow]}>
+            <View style={styles.heartIconContainer}>
             <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
+            </View>
+            <Image source={{ uri: article.imageUrl }} style={styles.articleImage} />
             <View style={styles.articleContent}>
-              <Text style={styles.articleTitle}>Berita, Lokasi</Text>
-              <Text style={styles.articleLocation}>Kab, Lokasi</Text>
-              <Text style={styles.articleStats}>4.8K</Text>
+              <Text style={styles.articleTitle}>{article.title}</Text>
+              <Text style={styles.articleLocation}>{article.location}</Text>
+              <Text style={styles.articleStats}>{article.views}</Text>
             </View>
           </View>
-          <View style={[styles.articleCard, styles.articleCardShadow]}>
-            <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
-            <View style={styles.articleContent}>
-              <Text style={styles.articleTitle}>Berita, Lokasi</Text>
-              <Text style={styles.articleLocation}>Kab, Lokasi</Text>
-              <Text style={styles.articleStats}>4.8K</Text>
-            </View>
-          </View>
-          <View style={[styles.articleCard, styles.articleCardShadow]}>
-            <FontAwesome name="heart" size={20} color="#ccc" style={styles.heartIcon} />
-            <View style={styles.articleContent}>
-              <Text style={styles.articleTitle}>Berita, Lokasi</Text>
-              <Text style={styles.articleLocation}>Kab, Lokasi</Text>
-              <Text style={styles.articleStats}>4.8K</Text>
-            </View>
-          </View>
-        </ScrollView>
+  ))}
+</ScrollView>
+
       </View>
     </ScrollView>
   )
@@ -203,11 +194,26 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'space-between',
   },
+  articleImage: {
+    width: '100%',
+    height: 250,
+    borderRadius: 30
+  },
   heartIcon: {
-    alignSelf: 'flex-end',
-    padding: 10,
+
     color: 'red',
   },
+
+  heartIconContainer: {
+    backgroundColor: "rgba(29, 29, 29, 0.4)",
+    borderRadius : 50,
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    zIndex: 10,
+    padding: 10,
+  },
+
   articleContent: {
     marginTop: 20,
     padding: 10,
