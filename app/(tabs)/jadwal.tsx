@@ -31,7 +31,7 @@ const Jadwal: React.FC = () => {
     const month = formattedDate[2];
     const year = formattedDate[3];
 
-    console.log(date, month);
+    // console.log(date, month);
     setScheduleData((prevData) => ({
       ...prevData,
       hari: day,
