@@ -1,4 +1,4 @@
-import { View, Text } from "react-native"
+
 import React from "react"
 import { Tabs } from "expo-router"
 import TabBar from "@/components/TabBar"
@@ -13,9 +13,23 @@ const _layout = () => {
       tabBar={(props) => <TabBar {...props} />}
     >
       <Tabs.Screen
-        name="index"
+        name="jadwal"
         options={{
-          title: "Home",
+          title: "",
+          tabBarHideOnKeyboard: true,
+        }}
+      />
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "",
+            tabBarHideOnKeyboard: true,
+          }}
+        />
+      <Tabs.Screen
+        name="kontakBidan"
+        options={{
+          title: "",
           tabBarHideOnKeyboard: true,
         }}
       />
