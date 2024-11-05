@@ -14,9 +14,9 @@ export interface ScheduleData {
   }
 
 export const initialData: ScheduleData = {
-    tanggal: "30",
+    tanggal: "6",
     hari: "Rabu",
-    bulan: "Okt",
+    bulan: "Nov",
     tahun: "2024",
     jadwal: [
       {
@@ -34,6 +34,21 @@ export const initialData: ScheduleData = {
         waktu: "18:30",
         kegiatan: "Makan Malam",
         keterangan: "Jangan lupa makan malam untuk keluarga"
-      }
+      },
+      {
+        waktu: "20:30",
+        kegiatan: "Tidur",
+        keterangan: "Jangan lupa istirahat"
+      },
     ]
+  };
+
+  export const getScheduleForDate = (date: string, scheduleData: ScheduleData): Activity[] => {
+    const selectedDate = new Date(date);
+  
+    if (selectedDate.toDateString() === new Date(scheduleData.tanggal).toDateString()) {
+      return scheduleData.jadwal;
+    }
+  
+    return [];
   };

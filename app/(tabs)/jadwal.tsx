@@ -11,27 +11,27 @@ import {
   initialData,
   ScheduleData,
   Activity,
+  getScheduleForDate
 } from "@/components/dummy/JadwalData";
 
 const Jadwal: React.FC = () => {
-  const [scheduleData, setScheduleData] = useState<ScheduleData>(initialData);
+  const [scheduleData, setScheduleData] = useState(initialData);
 
   useEffect(() => {
     const today = new Date();
     const options: Intl.DateTimeFormatOptions = {
-      weekday: "long", // 'long', 'short', 'narrow' untuk tipe weekday
-      year: "numeric", // 'numeric' untuk tahun
-      month: "short", // 'long', 'short', 'numeric', '2-digit' untuk tipe bulan
-      day: "numeric", // 'numeric' untuk tanggal
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     };
     const formattedDate = today.toLocaleDateString("id-ID", options).split(" ");
     const day = formattedDate[0];
-    const month = formattedDate[1];
-    const date = formattedDate[2];
+    const date = formattedDate[1];
+    const month = formattedDate[2];
     const year = formattedDate[3];
 
-    console.log(options);
-
+    console.log(date, month)
     setScheduleData((prevData) => ({
       ...prevData,
       hari: day,
@@ -41,20 +41,24 @@ const Jadwal: React.FC = () => {
     }));
   }, []);
 
+
   const handleDatePress = (date: string) => {
-    setScheduleData((prevData) => ({ ...prevData, tanggal: date }));
+    const fullDateString = `${scheduleData.tahun}-${scheduleData.bulan}-${date}`;
+    const activities = getScheduleForDate(fullDateString, initialData);
+    // setScheduleData((prevData) => ({ ...prevData, jadwal: activities }));
+    console.log(fullDateString)
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+            <View style={styles.header}>
         <Text style={styles.title}>Jadwal</Text>
           <View style={styles.dateBox}>
-            <Text style={styles.dateNumber}>{scheduleData.bulan}</Text>
+            <Text style={styles.dateNumber}>{scheduleData.tanggal}</Text>
             <View>
               <Text style={styles.dateText}>{scheduleData.hari}</Text>
               <Text style={styles.dateText}>
-                {scheduleData.tanggal} {scheduleData.tahun}
+                {scheduleData.bulan} {scheduleData.tahun}
               </Text>
             </View>
           </View>
@@ -74,7 +78,7 @@ const Jadwal: React.FC = () => {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.dates}>
-              {["27", "28", "29", "30", "31", "1", "2"].map((date, index) => (
+              {["27", "28", "29", "30", "31", "1", "2", "3", "4" ,"5" ,"6"].map((date, index) => (
                 <TouchableOpacity
                   key={index}
                   style={styles.dateButton}
@@ -83,7 +87,7 @@ const Jadwal: React.FC = () => {
                   <Text
                     style={[
                       styles.dateNumber,
-                      date === scheduleData.tanggal ? styles.selectedDate : {},
+                      date === scheduleData.bulan ? styles.selectedDate : {},
                     ]}
                   >
                     {date}
