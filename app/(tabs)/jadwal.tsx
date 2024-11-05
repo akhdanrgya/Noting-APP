@@ -9,7 +9,6 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   initialData,
-  ScheduleData,
   Activity,
   getScheduleForDate,
 } from "@/components/dummy/JadwalData";
@@ -86,7 +85,9 @@ const Jadwal: React.FC = () => {
                     <Text
                       style={[
                         styles.dateNumber,
-                        date === scheduleData.tanggal ? styles.selectedDate : {},
+                        date === scheduleData.tanggal
+                          ? styles.selectedDate
+                          : {},
                       ]}
                     >
                       {date}
@@ -125,9 +126,11 @@ const Jadwal: React.FC = () => {
               </View>
             ))
           ) : (
-            <Text style={{ color: "red" }}>
-              Tidak ada jadwal untuk tanggal ini
-            </Text>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ color: "black" }}>
+                Tidak ada jadwal untuk tanggal ini
+              </Text>
+            </View>
           )}
         </View>
       </ScrollView>

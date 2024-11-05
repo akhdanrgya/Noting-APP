@@ -5,7 +5,7 @@ export interface Activity {
     lokasi?: string;
   }
 
-export interface ScheduleData {
+interface ScheduleData {
     tanggal: string;
     hari: string;
     bulan: string;
