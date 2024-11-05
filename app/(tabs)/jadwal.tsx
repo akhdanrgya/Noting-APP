@@ -18,19 +18,21 @@ const Jadwal: React.FC = () => {
 
   useEffect(() => {
     const today = new Date();
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'long', // 'long', 'short', 'narrow' untuk tipe weekday
-      year: 'numeric', // 'numeric' untuk tahun
-      month: 'long', // 'long', 'short', 'numeric', '2-digit' untuk tipe bulan
-      day: 'numeric' // 'numeric' untuk tanggal
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long", // 'long', 'short', 'narrow' untuk tipe weekday
+      year: "numeric", // 'numeric' untuk tahun
+      month: "short", // 'long', 'short', 'numeric', '2-digit' untuk tipe bulan
+      day: "numeric", // 'numeric' untuk tanggal
     };
-    const formattedDate = today.toLocaleDateString('id-ID', options).split(' ');
+    const formattedDate = today.toLocaleDateString("id-ID", options).split(" ");
     const day = formattedDate[0];
     const month = formattedDate[1];
     const date = formattedDate[2];
     const year = formattedDate[3];
-  
-    setScheduleData(prevData => ({
+
+    console.log(options);
+
+    setScheduleData((prevData) => ({
       ...prevData,
       hari: day,
       bulan: month,
@@ -38,7 +40,6 @@ const Jadwal: React.FC = () => {
       tahun: year,
     }));
   }, []);
-  
 
   const handleDatePress = (date: string) => {
     setScheduleData((prevData) => ({ ...prevData, tanggal: date }));
@@ -48,15 +49,17 @@ const Jadwal: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Jadwal</Text>
-        <View style={styles.dateBox}>
-          <Text style={styles.dateNumber}>{scheduleData.tanggal}</Text>
-          <View>
-            <Text style={styles.dateText}>{scheduleData.hari}</Text>
-            <Text style={styles.dateText}>
-              {scheduleData.bulan} {scheduleData.tahun}
-            </Text>
+          <View style={styles.dateBox}>
+            <Text style={styles.dateNumber}>{scheduleData.bulan}</Text>
+            <View>
+              <Text style={styles.dateText}>{scheduleData.hari}</Text>
+              <Text style={styles.dateText}>
+                {scheduleData.tanggal} {scheduleData.tahun}
+              </Text>
+            </View>
           </View>
-        </View>
+
+
         <View style={styles.calendar}>
           <View style={styles.weekDays}>
             {["M", "S", "S", "R", "K", "J", "S"].map((day, index) => (
@@ -227,6 +230,11 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     marginLeft: 5,
   },
+
+  dateContainer: {
+
+  }
+
 });
 
 export default Jadwal;
