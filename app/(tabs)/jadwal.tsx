@@ -15,6 +15,7 @@ import {
 
 const Jadwal: React.FC = () => {
   const [scheduleData, setScheduleData] = useState(initialData);
+  const [datesInMonth, setDatesInMonth] = useState<string[]>([]); // Tambahkan state untuk tanggal
 
   useEffect(() => {
     const today = new Date();
@@ -30,7 +31,6 @@ const Jadwal: React.FC = () => {
     const month = formattedDate[2];
     const year = formattedDate[3];
 
-    // console.log(date, month);
     setScheduleData((prevData) => ({
       ...prevData,
       hari: day,
@@ -38,13 +38,23 @@ const Jadwal: React.FC = () => {
       tanggal: date,
       tahun: year,
     }));
+
+    const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    const dates = [];
+
+    for (let day = firstDayOfMonth.getDate(); day <= lastDayOfMonth.getDate(); day++) {
+      dates.push(String(day));
+    }
+
+    setDatesInMonth(dates);
   }, []);
 
   const handleDatePress = (date: string) => {
-    const fullDateString = `${scheduleData.tahun}-${scheduleData.bulan}-${date}`;
+    const fullDateString = `${scheduleData.tahun}-${scheduleData.bulan}-${date}`; // Gak perlu padding nol
     const activities = getScheduleForDate(fullDateString, initialData);
     setScheduleData((prevData) => ({ ...prevData, jadwal: activities }));
-    // console.log(fullDateString, activities);
+    console.log(activities, fullDateString);
   };
 
   return (
@@ -75,26 +85,22 @@ const Jadwal: React.FC = () => {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.dates}>
-              {["27", "28", "29", "30", "31", "1", "2", "3", "4", "5", "6"].map(
-                (date, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.dateButton}
-                    onPress={() => handleDatePress(date)}
+              {datesInMonth.map((date, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.dateButton}
+                  onPress={() => handleDatePress(date)}
+                >
+                  <Text
+                    style={[
+                      styles.dateNumber,
+                      date === scheduleData.tanggal ? styles.selectedDate : {},
+                    ]}
                   >
-                    <Text
-                      style={[
-                        styles.dateNumber,
-                        date === scheduleData.tanggal
-                          ? styles.selectedDate
-                          : {},
-                      ]}
-                    >
-                      {date}
-                    </Text>
-                  </TouchableOpacity>
-                )
-              )}
+                    {date}
+                  </Text>
+                </TouchableOpacity>
+              ))}
             </View>
           </ScrollView>
         </View>
