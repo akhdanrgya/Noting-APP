@@ -11,7 +11,7 @@ import {
   initialData,
   ScheduleData,
   Activity,
-  getScheduleForDate
+  getScheduleForDate,
 } from "@/components/dummy/JadwalData";
 
 const Jadwal: React.FC = () => {
@@ -31,7 +31,7 @@ const Jadwal: React.FC = () => {
     const month = formattedDate[2];
     const year = formattedDate[3];
 
-    console.log(date, month)
+    console.log(date, month);
     setScheduleData((prevData) => ({
       ...prevData,
       hari: day,
@@ -41,28 +41,26 @@ const Jadwal: React.FC = () => {
     }));
   }, []);
 
-
   const handleDatePress = (date: string) => {
     const fullDateString = `${scheduleData.tahun}-${scheduleData.bulan}-${date}`;
     const activities = getScheduleForDate(fullDateString, initialData);
-    // setScheduleData((prevData) => ({ ...prevData, jadwal: activities }));
-    console.log(fullDateString)
+    setScheduleData((prevData) => ({ ...prevData, jadwal: activities }));
+    // console.log(fullDateString, activities);
   };
 
   return (
     <View style={styles.container}>
-            <View style={styles.header}>
+      <View style={styles.header}>
         <Text style={styles.title}>Jadwal</Text>
-          <View style={styles.dateBox}>
-            <Text style={styles.dateNumber}>{scheduleData.tanggal}</Text>
-            <View>
-              <Text style={styles.dateText}>{scheduleData.hari}</Text>
-              <Text style={styles.dateText}>
-                {scheduleData.bulan} {scheduleData.tahun}
-              </Text>
-            </View>
+        <View style={styles.dateBox}>
+          <Text style={styles.dateNumber}>{scheduleData.tanggal}</Text>
+          <View>
+            <Text style={styles.dateText}>{scheduleData.hari}</Text>
+            <Text style={styles.dateText}>
+              {scheduleData.bulan} {scheduleData.tahun}
+            </Text>
           </View>
-
+        </View>
 
         <View style={styles.calendar}>
           <View style={styles.weekDays}>
@@ -78,51 +76,59 @@ const Jadwal: React.FC = () => {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.dates}>
-              {["27", "28", "29", "30", "31", "1", "2", "3", "4" ,"5" ,"6"].map((date, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={styles.dateButton}
-                  onPress={() => handleDatePress(date)}
-                >
-                  <Text
-                    style={[
-                      styles.dateNumber,
-                      date === scheduleData.bulan ? styles.selectedDate : {},
-                    ]}
+              {["27", "28", "29", "30", "31", "1", "2", "3", "4", "5", "6"].map(
+                (date, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={styles.dateButton}
+                    onPress={() => handleDatePress(date)}
                   >
-                    {date}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+                    <Text
+                      style={[
+                        styles.dateNumber,
+                        date === scheduleData.tanggal ? styles.selectedDate : {},
+                      ]}
+                    >
+                      {date}
+                    </Text>
+                  </TouchableOpacity>
+                )
+              )}
             </View>
           </ScrollView>
         </View>
       </View>
       <ScrollView>
         <View style={styles.content}>
-          {scheduleData.jadwal.map((activity: Activity, index: number) => (
-            <View key={index} style={styles.activity}>
-              <Text style={styles.activityTime}>{activity.waktu}</Text>
-              <View style={styles.activityCard}>
-                <Text style={styles.activityTitle}>{activity.kegiatan}</Text>
-                <Text style={styles.activityDescription}>
-                  {activity.keterangan}
-                </Text>
-                {activity.lokasi && (
-                  <View style={styles.activityLocationRow}>
-                    <MaterialCommunityIcons
-                      name="map-marker"
-                      size={16}
-                      color="#ffffff"
-                    />
-                    <Text style={styles.activityLocation}>
-                      {activity.lokasi}
-                    </Text>
-                  </View>
-                )}
+          {scheduleData.jadwal && scheduleData.jadwal.length > 0 ? (
+            scheduleData.jadwal.map((activity: Activity, index: number) => (
+              <View key={index} style={styles.activity}>
+                <Text style={styles.activityTime}>{activity.waktu}</Text>
+                <View style={styles.activityCard}>
+                  <Text style={styles.activityTitle}>{activity.kegiatan}</Text>
+                  <Text style={styles.activityDescription}>
+                    {activity.keterangan}
+                  </Text>
+                  {activity.lokasi && (
+                    <View style={styles.activityLocationRow}>
+                      <MaterialCommunityIcons
+                        name="map-marker"
+                        size={16}
+                        color="#ffffff"
+                      />
+                      <Text style={styles.activityLocation}>
+                        {activity.lokasi}
+                      </Text>
+                    </View>
+                  )}
+                </View>
               </View>
-            </View>
-          ))}
+            ))
+          ) : (
+            <Text style={{ color: "red" }}>
+              Tidak ada jadwal untuk tanggal ini
+            </Text>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -235,10 +241,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
 
-  dateContainer: {
-
-  }
-
+  dateContainer: {},
 });
 
 export default Jadwal;

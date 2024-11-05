@@ -44,11 +44,14 @@ export const initialData: ScheduleData = {
   };
 
   export const getScheduleForDate = (date: string, scheduleData: ScheduleData): Activity[] => {
-    const selectedDate = new Date(date);
-  
-    if (selectedDate.toDateString() === new Date(scheduleData.tanggal).toDateString()) {
-      return scheduleData.jadwal;
+    const [year, month, day] = date.split('-');
+    const selectedDateString = `${day} ${month} ${year}`;
+
+    const scheduleDateString = `${scheduleData.tanggal} ${scheduleData.bulan} ${scheduleData.tahun}`;
+
+    if (selectedDateString === scheduleDateString) {
+        return scheduleData.jadwal;
     }
-  
+
     return [];
-  };
+};
