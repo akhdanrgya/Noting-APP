@@ -107,7 +107,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-    paddingBottom: 80, // Adjust based on your bottom bar height
+    paddingBottom: 80,
   },
   container: {
     backgroundColor: "#ffffff",
