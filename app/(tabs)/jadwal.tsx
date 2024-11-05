@@ -54,7 +54,7 @@ const Jadwal: React.FC = () => {
     const fullDateString = `${scheduleData.tahun}-${scheduleData.bulan}-${date}`; // Gak perlu padding nol
     const activities = getScheduleForDate(fullDateString, initialData);
     setScheduleData((prevData) => ({ ...prevData, jadwal: activities }));
-    console.log(activities, fullDateString);
+    // console.log(activities, fullDateString);
   };
 
   return (
