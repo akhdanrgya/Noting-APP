@@ -15,7 +15,7 @@ import {
 
 const Jadwal: React.FC = () => {
   const [scheduleData, setScheduleData] = useState(initialData);
-  const [datesInMonth, setDatesInMonth] = useState<string[]>([]); // Tambahkan state untuk tanggal
+  const [datesInMonth, setDatesInMonth] = useState<string[]>([]);
 
   useEffect(() => {
     const today = new Date();
@@ -51,7 +51,7 @@ const Jadwal: React.FC = () => {
   }, []);
 
   const handleDatePress = (date: string) => {
-    const fullDateString = `${scheduleData.tahun}-${scheduleData.bulan}-${date}`; // Gak perlu padding nol
+    const fullDateString = `${scheduleData.tahun}-${scheduleData.bulan}-${date}`;
     const activities = getScheduleForDate(fullDateString, initialData);
     setScheduleData((prevData) => ({ ...prevData, jadwal: activities }));
     // console.log(activities, fullDateString);
