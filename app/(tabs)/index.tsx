@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -11,8 +11,30 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { dummyArticles } from "@/components/dummy/Card";
 import { chipData } from "@/components/dummy/ChipData";
+import { getFirestore, collection, getDocs } from 'firebase/firestore'
+import { db } from "@/hooks/firebaseConfig";
 
 const Home = () => {
+  const [articles, setArticles] = useState<any[]>([]);
+
+  const fetchArticles = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'chipData'));
+      const fetchedArticles = querySnapshot.docs.map(doc => doc.data());
+      setArticles(fetchedArticles);
+    } catch (error) {
+      console.error("Error fetching chipData: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles();
+    console.log(process.env.test)
+    console.log(articles)
+  }, []);
+
+
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
