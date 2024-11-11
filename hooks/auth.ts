@@ -1,7 +1,6 @@
-import { auth } from './firebaseConfig'; // Pastikan path ini sesuai
+import { auth } from './firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
-// Sign up dengan email dan password
 export const signUp = async (email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -12,7 +11,6 @@ export const signUp = async (email: string, password: string) => {
   }
 };
 
-// Sign in dengan email dan password
 export const signIn = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -23,7 +21,6 @@ export const signIn = async (email: string, password: string) => {
   }
 };
 
-// Sign out
 export const logOut = async () => {
   try {
     await signOut(auth);
@@ -34,7 +31,7 @@ export const logOut = async () => {
   }
 };
 
-// Listen to auth state changes (user login status)
+// ini buat listen doang
 export const onAuthChanged = (callback: (user: any) => void) => {
   return onAuthStateChanged(auth, (user) => {
     callback(user);

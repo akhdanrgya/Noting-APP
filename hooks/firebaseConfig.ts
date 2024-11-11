@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
-// Firebase configuration
 const firebaseConfig = {
     // apiKey: process.env.FIREBASE_API_KEY,
     // authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -21,13 +20,9 @@ const firebaseConfig = {
   measurementId: "G-76XRB2WLT8"
 }
 
-// Initialize Firebase App
+
 const app = initializeApp(firebaseConfig)
-
-// Initialize Firestore
 const db = getFirestore(app)
-
-// Initialize Auth without React Native persistence
 const auth = getAuth(app)
 
 console.log('Firebase app initialized', app.name)
