@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react"
 import { View, StyleSheet, SafeAreaView } from "react-native"
 import SplashScreen from "@/components/SplashScreen"
-import { Slot } from "expo-router"
+import { useRouter, Slot } from "expo-router"
+
 
 const Layout = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 2000)
+
     return () => clearTimeout(timer)
-  }, [])
+  }, [router])
 
   if (isLoading) {
     return <SplashScreen />
