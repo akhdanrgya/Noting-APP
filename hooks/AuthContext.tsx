@@ -38,16 +38,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (loading) return; // Jangan routing selama loading
-
+    console.log("User:", user, "Loading:", loading);
+    if (loading) return;
+  
     if (user) {
-      // Redirect ke /tabs/ jika user sudah login
-      router.replace("/tabs/");
+      router.push("/tabs");
     } else {
-      // Redirect ke /auth/sign-in jika user belum login
-      router.replace("/auth/sign-in");
+      router.push("/auth/sign-in");
     }
   }, [user, loading, router]);
+  
 
   const logout = async () => {
     try {
@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   return (
     <AuthContext.Provider value={{ user, loading, logout }}>
       {loading ? (
-        <View><Text>Loading...</Text></View> // Tampilkan loading screen dulu
+        <View><Text>Loading...</Text></View>
       ) : (
         children
       )}

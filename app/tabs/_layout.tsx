@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
-import { Tabs } from "expo-router"
-import { useRouter } from "expo-router"
-import { AuthProvider } from "@/hooks/AuthContext"
-import TabBar from "@/components/TabBar"
+import React, { useEffect, useState } from "react";
+import { Tabs } from "expo-router";
+import { AuthProvider } from "@/hooks/AuthContext";
+import TabBar from "@/components/TabBar";
 
 const _layout = () => {
   return (
@@ -37,7 +36,7 @@ const _layout = () => {
         />
       </Tabs>
     </AuthProvider>
-  )
-}
+  );
+};
 
-export default _layout
+export default _layout;
