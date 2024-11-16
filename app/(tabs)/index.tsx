@@ -26,10 +26,9 @@ const Home = () => {
       console.error("Error fetching chipData: ", error);
     }
   };
-
+  
   useEffect(() => {
     fetchArticles();
-    console.log(process.env.test)
     console.log(articles)
   }, []);
 
