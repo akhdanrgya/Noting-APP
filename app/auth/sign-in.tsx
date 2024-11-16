@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { TextInput, Button, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { TextInput, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/hooks/firebaseConfig";
 import { useFonts } from "expo-font";
@@ -66,6 +66,11 @@ const SignIn = () => {
         <TouchableOpacity style={styles.button} onPress={handleSignIn}>
           <Text style={styles.buttonText}>Masuk</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.anotherAccContainer}>
+        <Text>- Atau masuk dengan yang lain -</Text>
+        <Text>Tidak memiliki akun? coba {" "}
+            <TouchableOpacity onPress={() => router.push("/auth/sign-up")}><Text style={styles.link}>buat</Text></TouchableOpacity></Text>
       </View>
     </View>
   );
@@ -137,4 +142,17 @@ const styles = StyleSheet.create({
   errorContainer: {
     paddingHorizontal: 30,
   },
+
+  anotherAccContainer : {
+    flex: 1,
+    alignItems: 'center',
+    marginVertical: 20
+  },
+
+  link: {
+    color: "#6c4bf4",
+    fontWeight: "bold",
+  },
+
+
 });
