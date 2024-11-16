@@ -4,7 +4,6 @@ import React, {
   useState,
   useEffect,
   ReactNode,
-  useRef,
 } from "react";
 import { User, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/hooks/firebaseConfig";
@@ -42,9 +41,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (loading) return;
   
     if (user) {
-      router.push("/(tabs)index");
+      router.replace("/(tabs)index");
     } else {
-      router.push("/auth/sign-in");
+      router.replace("/auth/sign-in");
     }
   }, [user, loading, router]);
   

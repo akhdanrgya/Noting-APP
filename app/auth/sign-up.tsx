@@ -36,7 +36,7 @@ const SignUp = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log("Akun berhasil dibuat!");
-      router.push("/(tabs)index");
+      router.replace("/(tabs)index");
     } catch (err: any) {
       setError("Terjadi kesalahan saat mendaftar!");
     }

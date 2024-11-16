@@ -24,7 +24,7 @@ const SignIn = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("Signed in successfully!");
-      router.push("/(tabs)index");
+      router.replace("/(tabs)index");
     } catch (err: any) {
       console.error(err);
       setError("Email atau password salah!");
