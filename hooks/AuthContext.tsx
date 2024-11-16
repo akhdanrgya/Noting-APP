@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (loading) return;
   
     if (user) {
-      router.push("/tabs");
+      router.push("/(tabs)index");
     } else {
       router.push("/auth/sign-in");
     }
