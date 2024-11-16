@@ -1,6 +1,8 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';  // Import AsyncStorage
+import { initializeAuth, browserLocalPersistence,  } from 'firebase/auth'; // Jangan lupa import persistence
+
 
 const firebaseConfig = {
   // apiKey: process.env.FIREBASE_API_KEY,
@@ -21,9 +23,15 @@ const firebaseConfig = {
 }
 
 
+// Cek apakah app sudah diinisialisasi, jika belum maka inisialisasi
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+// Gunakan initializeAuth dan set persistence ke browserLocalPersistence (ini sudah termasuk asyncStorage di dalamnya)
+const auth = initializeAuth(app, {
+  persistence: browserLocalPersistence  // Memastikan otentikasi Firebase dipertahankan menggunakan AsyncStorage
+});
+
 const db = getFirestore(app);
-const auth = getAuth(app);
 
 console.log('Firebase app initialized', app.name);
 

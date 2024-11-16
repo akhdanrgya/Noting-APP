@@ -1,4 +1,4 @@
-// app/auth/sign-up.tsx
+
 import React, { useState } from "react";
 import {
   TextInput,

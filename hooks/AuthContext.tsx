@@ -28,34 +28,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  // Cek rute terakhir untuk menghindari redirect berulang
-  const previousRoute = useRef<string>("");
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
-
-      // Cek apakah kita lagi dalam status loading atau tidak
-      if (loading) return;
-
-      if (user) {
-        // Jika user sudah login, arahkan ke halaman /tabs
-        if (previousRoute.current !== "/tabs/") {
-          router.replace("/tabs/");
-          previousRoute.current = "/tabs/";  // Simpan rute terakhir
-        }
-      } else {
-        // Jika user tidak terautentikasi, arahkan ke halaman /auth/sign-in
-        if (previousRoute.current !== "/auth/sign-in") {
-          router.replace("/auth/sign-in");
-          previousRoute.current = "/auth/sign-in";  // Simpan rute terakhir
-        }
-      }
     });
 
     return () => unsubscribe();
-  }, [loading, router]);
+  }, []);
+
+  useEffect(() => {
+    if (loading) return; // Jangan routing selama loading
+
+    if (user) {
+      // Redirect ke /tabs/ jika user sudah login
+      router.replace("/tabs/");
+    } else {
+      // Redirect ke /auth/sign-in jika user belum login
+      router.replace("/auth/sign-in");
+    }
+  }, [user, loading, router]);
 
   const logout = async () => {
     try {
@@ -70,7 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   return (
     <AuthContext.Provider value={{ user, loading, logout }}>
       {loading ? (
-        <View><Text>Loading...</Text></View> // Menampilkan loading sampai auth state siap
+        <View><Text>Loading...</Text></View> // Tampilkan loading screen dulu
       ) : (
         children
       )}
