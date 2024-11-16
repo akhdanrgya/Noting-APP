@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import {
   View,
   Text,
@@ -7,32 +7,42 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { dummyArticles } from "@/components/dummy/Card";
-import { chipData } from "@/components/dummy/ChipData";
-import { getFirestore, collection, getDocs } from 'firebase/firestore'
-import { db } from "@/hooks/firebaseConfig";
+} from "react-native"
+import { FontAwesome } from "@expo/vector-icons"
+import { dummyArticles } from "@/components/dummy/Card"
+import { chipData } from "@/components/dummy/ChipData"
+import { getFirestore, collection, getDocs } from "firebase/firestore"
+import { db, auth } from "@/hooks/firebaseConfig"
+import { signOut } from "firebase/auth"
+import { useAuth } from "@/hooks/AuthContext"
 
 const Home = () => {
-  const [articles, setArticles] = useState<any[]>([]);
+  const [articles, setArticles] = useState<any[]>([])
+  const { logout } = useAuth();
 
   const fetchArticles = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'chipData'));
-      const fetchedArticles = querySnapshot.docs.map(doc => doc.data());
-      setArticles(fetchedArticles);
+      const querySnapshot = await getDocs(collection(db, "chipData"))
+      const fetchedArticles = querySnapshot.docs.map((doc) => doc.data())
+      setArticles(fetchedArticles)
     } catch (error) {
-      console.error("Error fetching chipData: ", error);
+      console.error("Error fetching chipData: ", error)
     }
-  };
-  
+  }
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth)
+      console.log("User logged out")
+    } catch (error) {
+      console.error("Error signing out: ", error)
+    }
+  }
+
   useEffect(() => {
-    fetchArticles();
+    fetchArticles()
     console.log(articles)
-  }, []);
-
-
+  }, [])
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -120,10 +130,15 @@ const Home = () => {
             </View>
           ))}
         </ScrollView>
+
+        {/* Logout Button */}
+        <TouchableOpacity style={styles.logoutButton} onPress={logout}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   scrollContainer: {
@@ -201,7 +216,6 @@ const styles = StyleSheet.create({
   arrowIcon: {
     marginLeft: 5,
   },
-
   berikut: {
     color: "#1E1E1E",
     fontSize: 16,
@@ -252,7 +266,6 @@ const styles = StyleSheet.create({
   heartIcon: {
     color: "red",
   },
-
   heartIconContainer: {
     backgroundColor: "rgba(29, 29, 29, 0.4)",
     borderRadius: 50,
@@ -262,7 +275,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
     padding: 10,
   },
-
   articleContent: {
     marginTop: 20,
     padding: 10,
@@ -279,6 +291,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#333",
   },
-});
 
-export default Home;
+  logoutButton: {
+    backgroundColor: "#FF3B30",
+    borderRadius: 30,
+    padding: 15,
+    marginTop: 20,
+    marginHorizontal: 20,
+    alignItems: "center",
+  },
+
+  logoutText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+})
+
+export default Home

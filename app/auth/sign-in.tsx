@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { TextInput, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -9,13 +8,14 @@ import { useRouter } from "expo-router";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [fontsLoaded] = useFonts({
     noting: require("../../assets/fonts/Noting.ttf"),
   });
   const router = useRouter();
 
   const handleSignIn = async () => {
+    console.log("sign in")
     if (!email || !password) {
       setError("Email dan password harus diisi!");
       return;
@@ -26,9 +26,15 @@ const SignIn = () => {
       console.log("Signed in successfully!");
       router.push("/tabs/");
     } catch (err: any) {
+      console.error(err);
       setError("Email atau password salah!");
     }
   };
+
+
+  if (!fontsLoaded) {
+    return <Text>Loading fonts...</Text>;
+  }
 
   return (
     <View style={styles.container}>
@@ -60,7 +66,7 @@ const SignIn = () => {
         </View>
 
         <View style={styles.errorContainer}>
-          {error && <Text style={{ color: 'red' }}>{error}</Text>}
+          {error && <Text style={{ color: "red" }}>{error}</Text>}
         </View>
 
         <TouchableOpacity style={styles.button} onPress={handleSignIn}>
@@ -69,8 +75,11 @@ const SignIn = () => {
       </View>
       <View style={styles.anotherAccContainer}>
         <Text>- Atau masuk dengan yang lain -</Text>
-        <Text>Tidak memiliki akun? coba {" "}
-            <TouchableOpacity onPress={() => router.push("/auth/sign-up")}><Text style={styles.link}>buat</Text></TouchableOpacity></Text>
+        <Text>Tidak memiliki akun? coba{" "}
+          <TouchableOpacity onPress={() => router.push("/auth/sign-up")}>
+            <Text style={styles.link}>buat</Text>
+          </TouchableOpacity>
+        </Text>
       </View>
     </View>
   );
@@ -143,16 +152,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
-  anotherAccContainer : {
+  anotherAccContainer: {
     flex: 1,
-    alignItems: 'center',
-    marginVertical: 20
+    alignItems: "center",
+    marginVertical: 20,
   },
 
   link: {
     color: "#6c4bf4",
     fontWeight: "bold",
   },
-
-
 });
