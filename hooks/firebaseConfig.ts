@@ -12,14 +12,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
-
-  // apiKey: "AIzaSyCCMCBL0r3iu6BEJDWgOkq9geND4M6C-AE",
-  // authDomain: "gokiltech.firebaseapp.com",
-  // projectId: "gokiltech",
-  // storageBucket: "gokiltech.firebasestorage.app",
-  // messagingSenderId: "941836526215",
-  // appId: "1:941836526215:web:d67cee168e92f505e14e22",
-  // measurementId: "G-76XRB2WLT8"
 }
 
 
