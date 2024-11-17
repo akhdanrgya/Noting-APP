@@ -41,7 +41,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (loading) return;
   
     if (user) {
-      router.replace("/(tabs)index");
+      router.replace("/(tabs)");
     } else {
       router.replace("/auth/sign-in");
     }
