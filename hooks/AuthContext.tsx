@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       router.replace("/auth/sign-in");
     }
   }, [user, loading, router]);
-  
+
 
   const logout = async () => {
     try {
